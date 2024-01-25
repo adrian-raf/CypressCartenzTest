@@ -239,5 +239,21 @@ describe('Test login', () => {
     ).type(
       'https://docs.google.com/spreadsheets/d/1xY53MJl_TMIOt7abR5BNBnp80S2KefbadNVmOiovJ1s/edit?usp=sharing'
     );
+
+    cy.get(
+      ':nth-child(50) > .col-md-12 > :nth-child(1) > :nth-child(1) > .form-group > .form-control'
+    ).type('https://github.com/adrian-raf/CypressCartenzTest');
+
+    cy.get(
+      ':nth-child(51) > .col-md-12 > :nth-child(1) > :nth-child(1) > .form-group > .form-control'
+    ).type(
+      'https://drive.google.com/drive/folders/1J8XLG1VrZE7OjffegaqK87NnujYB_2tO'
+    );
+
+    cy.get("label[for='upload-file0']").selectFile(
+      'C:/Users/adria/Downloads/aaa.jpeg'
+    );
+
+    cy.get('.default-btn').click();
   });
 });

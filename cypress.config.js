@@ -10,4 +10,5 @@ module.exports = defineConfig({
       baseURL: 'https://internal.citigov.id/signin',
     },
   },
+  video: true,
 });
