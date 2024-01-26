@@ -1,8 +1,10 @@
 /// <reference types="cypress" />;
 import LoginPage from './Pages/LoginPage';
 import * as data from './/../fixtures/example.json';
+import HomePage from './Pages/HomePage';
 
 const login = new LoginPage();
+const home = new HomePage();
 const allData = data;
 
 describe('Test login', () => {
@@ -35,15 +37,9 @@ describe('Test login', () => {
     cy.get('#option_6859').check('2', { force: true }).should('be.checked');
     cy.get('#option_6862').check('2', { force: true }).should('be.checked');
     cy.get('#option_6868').check('6', { force: true }).should('be.checked');
-    cy.get(
-      ':nth-child(7) > .col-md-12 > :nth-child(1) > :nth-child(1) > .form-group > .form-control'
-    ).type('31245270229502');
-    cy.get(
-      ':nth-child(9) > .col-md-12 > :nth-child(1) > :nth-child(1) > .form-group > .form-control'
-    ).type(allData.name);
-    cy.get(
-      ':nth-child(10) > .col-md-12 > :nth-child(1) > :nth-child(1) > .form-group > .form-control'
-    ).type('Depok');
+    home.getKTP().type('31245270229502');
+    home.getNama().type(allData.name);
+    home.getTempLahir().type('Depok');
 
     cy.get('.rdt > .form-control');
     cy.get('.rdtPicker').click({ force: true });
@@ -55,7 +51,6 @@ describe('Test login', () => {
       cy.get('.rdtPrev').click({ force: true });
     }
 
-    // cy.get('.rdtYear')
     cy.get('tr td:nth-child(3)').each((el) => {
       if (el.text() === '1999') {
         cy.wrap(el).click({ force: true });
@@ -72,23 +67,24 @@ describe('Test login', () => {
       }
     });
 
-    cy.get(
-      ':nth-child(12) > .col-md-12 > :nth-child(1) > :nth-child(1) > .form-group > .form-control'
-    ).type('Depok, Jabar');
+    home.getTempLahir().type('Depok, Jabar');
 
     cy.get(
       ':nth-child(15) > .col-md-12 > :nth-child(1) > :nth-child(1) > .form-group > .card-pelayanan-text-style-black > .css-yk16xz-control > .css-g1d714-ValueContainer'
-    ).type('Ja');
+    ).type('ja');
     // cy.get('.css-4ljt47-MenuList').each((el) => {
-    //   if (el.text() === 'Jawa Barat') {
+    //   const text = el.find('#react-select-25-input').text();
+    //   if (text === 'JAWA BARAT') {
     //     cy.wrap(el).click({ force: true });
     //   }
     // });
+
     cy.get('#react-select-3-option-3').click();
 
     cy.get(
       ':nth-child(16) > .col-md-12 > :nth-child(1) > :nth-child(1) > .form-group > :nth-child(2) > .css-yk16xz-control > .css-g1d714-ValueContainer'
     ).type('Ja');
+
     cy.get('#react-select-4-option-3').click();
 
     cy.get(
@@ -233,27 +229,24 @@ describe('Test login', () => {
 
     cy.get('.col-md-12 > .row > .text-right > .btn').click();
 
-    // link spreadshit
-    cy.get(
-      ':nth-child(49) > .col-md-12 > :nth-child(1) > :nth-child(1) > .form-group > .form-control'
-    ).type(
-      'https://docs.google.com/spreadsheets/d/1xY53MJl_TMIOt7abR5BNBnp80S2KefbadNVmOiovJ1s/edit?usp=sharing'
-    );
+    home
+      .getSpreadsheet()
+      .type(
+        'https://docs.google.com/spreadsheets/d/1xY53MJl_TMIOt7abR5BNBnp80S2KefbadNVmOiovJ1s/edit?usp=sharing'
+      );
 
-    cy.get(
-      ':nth-child(50) > .col-md-12 > :nth-child(1) > :nth-child(1) > .form-group > .form-control'
-    ).type('https://github.com/adrian-raf/CypressCartenzTest');
+    home.getGithub().type('https://github.com/adrian-raf/CypressCartenzTest');
 
-    cy.get(
-      ':nth-child(51) > .col-md-12 > :nth-child(1) > :nth-child(1) > .form-group > .form-control'
-    ).type(
-      'https://drive.google.com/drive/folders/1J8XLG1VrZE7OjffegaqK87NnujYB_2tO'
-    );
+    home
+      .getVideo()
+      .type(
+        'https://drive.google.com/drive/folders/1J8XLG1VrZE7OjffegaqK87NnujYB_2tO'
+      );
 
     cy.get("label[for='upload-file0']").selectFile(
       'C:/Users/adria/Downloads/aaa.jpeg'
     );
 
-    cy.get('.default-btn').click();
+    // cy.get('.default-btn').click();
   });
 });

@@ -1,3 +1,4 @@
+//  npx cypress run --spec cypress/integration/Test.registrasi.js --headed --browser chrome
 const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
